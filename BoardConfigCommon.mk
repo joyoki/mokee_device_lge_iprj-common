@@ -11,6 +11,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
+TARGET_CPU_VARIANT := cortex-a8
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -35,7 +36,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2004621312
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-#BOARD_TOUCH_RECOVERY := true
+BOARD_RECOVERY_SWIPE := true
 BOARD_CUSTOM_GRAPHICS := ../../../device/lge/iprj-common/recovery-gfx.c
 TARGET_USERIMAGES_USE_EXT4 := true
 
@@ -103,5 +104,40 @@ ENABLE_WEBGL := true
 
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_AUDIO_VARIANT := caf
-BOARD_HAVE_OLD_ION_API := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/iprj-common/vnd_bt.txt
+TARGET_DISPLAY_INSECURE_MM_HEAP := true
+
+BOARD_SEPOLICY_DIRS += \
+        device/lge/iprj-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+        genfs_contexts \
+        file_contexts \
+	property_contexts \
+	te_macros \
+	bluetooth.te \
+	camera.te \
+	device.te \
+	dhcp.te \
+	domain.te \
+	drmserver.te \
+	file.te \
+	kickstart.te \
+	init.te \
+	mediaserver.te \
+	mpdecision.te \
+	netmgrd.te \
+	property.te \
+	qmux.te \
+	rild.te \
+	rmt.te \
+	sensors.te \
+	surfaceflinger.te \
+	system.te \
+	tee.te \
+	thermald.te \
+	ueventd.te \
+	wpa_supplicant.te
+
+BOARD_HARDWARE_CLASS := device/lge/iprj-common/cmhw/
+

@@ -28,6 +28,9 @@
 
     <bool name="config_automatic_brightness_available">true</bool>
 
+    <!-- Device supports LED flashlight -->
+    <bool name="config_enableTorch">true</bool>
+
     <!-- These are all dummies, but need to be present to enable UI control of auto-brightness
                   The actual control and values are all in-kernel -->
     <integer-array name="config_autoBrightnessLevels">
@@ -145,12 +148,5 @@
         <item>"7,1"</item>
     </string-array>
 
-    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
-
-    <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
-                  specified -->
-    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
-
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+    <integer name="config_deviceHardwareKeys">7</integer>
 </resources>
