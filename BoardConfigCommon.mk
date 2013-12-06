@@ -21,7 +21,7 @@ TARGET_USE_SCORPION_PLD_SET := true
 TARGET_SCORPION_BIONIC_PLDOFFS := 6
 TARGET_SCORPION_BIONIC_PLDSIZE := 128
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=iprj no_console_suspend=1
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=iprj no_console_suspend=1 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x40200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
@@ -85,8 +85,11 @@ TARGET_PROVIDES_LIBLIGHTS := true
 
 BOARD_HAVE_BACK_MIC_CAMCORDER := true
 
-COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB -DQCOM_ACDB_ENABLED
+COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB -DQCOM_ACDB_ENABLED -DNEEDS_VECTORIMPL_SYMBOLS
 BOARD_NEEDS_MEMORYHEAPPMEM := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+# Camera wrapper
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
 ## This is evil. The mt9m114 (FFC) data inside the liboemcamera blob is in the .bss section,
 ## and inaccessible if PIE is enabled
@@ -113,10 +116,8 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
         genfs_contexts \
         file_contexts \
-	property_contexts \
 	te_macros \
 	bluetooth.te \
-	camera.te \
 	device.te \
 	dhcp.te \
 	domain.te \
@@ -124,20 +125,16 @@ BOARD_SEPOLICY_UNION += \
 	file.te \
 	kickstart.te \
 	init.te \
-	mediaserver.te \
-	mpdecision.te \
-	netmgrd.te \
-	property.te \
-	qmux.te \
 	rild.te \
-	rmt.te \
-	sensors.te \
-	surfaceflinger.te \
+    surfaceflinger.te \
 	system.te \
-	tee.te \
-	thermald.te \
 	ueventd.te \
-	wpa_supplicant.te
+	wpa_supplicant.te \
+	app.te \
+	hci_init.te \
+	init_hell.te \
+	keystore.te \
+	mediaserver.te \
+    wpa.te
 
 BOARD_HARDWARE_CLASS := device/lge/iprj-common/cmhw/
-

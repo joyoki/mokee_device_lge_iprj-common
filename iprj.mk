@@ -96,7 +96,8 @@ PRODUCT_PACKAGES += \
     libOmxCore
 
 PRODUCT_PACKAGES += \
-    hwaddrs
+    hwaddrs \
+    firmware_init
 
 # Charger mode
 PRODUCT_PACKAGES += \
